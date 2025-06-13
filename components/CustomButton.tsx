@@ -44,7 +44,7 @@ export function CustomButton({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className={`w-full rounded-full flex flex- items-center justify-center p-3 shadow-md shadow-neutral-400/70 ${getBgVariantStyle(bgVariant)} ${className}`}
+      className={`w-full rounded-full flex flex-row items-center justify-center p-3 shadow-md shadow-neutral-400/70 ${getBgVariantStyle(bgVariant)} ${className}`}
       {...props}
     >
       {IconLeft && <IconLeft />}
