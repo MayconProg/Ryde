@@ -7,7 +7,7 @@ import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 
-export default function SignIp() {
+export default function SignIn() {
   const { signIn, setActive, isLoaded } = useSignIn();
   const router = useRouter();
 
