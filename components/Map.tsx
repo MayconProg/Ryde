@@ -3,7 +3,6 @@ import { calculateRegion, generateMarkersFromData } from "@/lib/map";
 import { useDriverStore, useLocationStore } from "@/store";
 import { MarkerData } from "@/types/type";
 import { useEffect, useState } from "react";
-import { Text } from "react-native";
 import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
 
 const drivers = [
@@ -88,7 +87,7 @@ export function Map() {
   return (
     <MapView
       className="w-full h-full rounded-2xl"
-      style={{ width: 350, height: 300 }}
+      style={{ width: "100%", height: "100%" }}
       provider={PROVIDER_DEFAULT}
       tintColor="black"
       mapType="terrain"
@@ -110,7 +109,6 @@ export function Map() {
           }}
         />
       ))}
-      <Text>Map</Text>
     </MapView>
   );
 }
