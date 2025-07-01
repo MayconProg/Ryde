@@ -10,6 +10,9 @@ import { Driver, MarkerData } from "@/types/type";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
+import MapViewDirections from "react-native-maps-directions";
+
+const googlePublicAPIKey = process.env.EXPO_PUBLIC_GOOGLE_API_KEY as string;
 
 export function Map() {
   const { data: drivers, loading, error } = useFetch<Driver[]>("/(api)/driver");
@@ -100,6 +103,34 @@ export function Map() {
           }}
         />
       ))}
+
+      {destinationLatitude && destinationLongitude && (
+        <>
+          <Marker
+            key="destination"
+            coordinate={{
+              latitude: destinationLatitude,
+              longitude: destinationLongitude,
+            }}
+            title="Destination"
+            image={icons.pin}
+          />
+
+          <MapViewDirections
+            apikey={googlePublicAPIKey}
+            origin={{
+              latitude: userLatitude,
+              longitude: userLongitude,
+            }}
+            destination={{
+              latitude: destinationLatitude,
+              longitude: destinationLongitude,
+            }}
+            strokeColor="#0286FF"
+            strokeWidth={3}
+          />
+        </>
+      )}
     </MapView>
   );
 }
