@@ -1,9 +1,45 @@
 import { icons } from "@/constants";
+import { fetchAPI } from "@/lib/fetch";
+import { useSSO } from "@clerk/clerk-expo";
+import * as AuthSession from "expo-auth-session";
+import { useCallback } from "react";
 import { Image, Text, View } from "react-native";
 import { CustomButton } from "./CustomButton";
 
 export function OAuth() {
-  function handleGoogleSignIn() {}
+  const { startSSOFlow } = useSSO();
+
+  const handleGoogleSignIn = useCallback(async () => {
+    try {
+      const { createdSessionId, setActive, signIn, signUp } =
+        await startSSOFlow({
+          strategy: "oauth_google",
+          redirectUrl: AuthSession.makeRedirectUri({
+            path: "/(root)/(tabs)/home",
+            scheme: "Ryde",
+          }),
+        });
+
+      if (createdSessionId) {
+        if (setActive) {
+          await setActive!({ session: createdSessionId });
+
+          if (signUp?.createdUserId) {
+            await fetchAPI("/(api)/user", {
+              method: "POST",
+              body: JSON.stringify({
+                name: `${signUp.firstName} ${signUp.lastName}`,
+                email: signUp.emailAddress,
+                clerkId: signUp.createdUserId,
+              }),
+            });
+          }
+        }
+      }
+    } catch (err) {
+      console.error(JSON.stringify(err, null, 2));
+    }
+  }, []);
 
   return (
     <View>
