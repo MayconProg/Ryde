@@ -22,7 +22,7 @@ export async function GET(request: Request, { id }: { id: string }) {
     rides.payment_status,
     rides.created_at,
     'driver', json_build_object(
-        'driver_id', drivers_id,
+        'driver_id', drivers.id,
         'first_name', drivers.first_name,
         'last_name', drivers.last_name,
         'profile_image_url', drivers.profile_image_url,
@@ -32,9 +32,9 @@ export async function GET(request: Request, { id }: { id: string }) {
     ) AS driver
 
     FROM rides
-    INNER JOIN drivers ON rides.driver_id = driver.id
+    INNER JOIN drivers ON rides.driver_id = drivers.id
     WHERE rides.user_id = ${id}
-    ORDER BY rides.created_at DESC
+    ORDER BY rides.created_at DESC;
     `;
 
     return Response.json({ data: response });
