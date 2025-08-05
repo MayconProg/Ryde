@@ -1,50 +1,142 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# 🚘 Ryde – Your Personal Ride-Hailing Companion
 
-## Get started
+**Ryde** is a mobile-first ride-hailing app built with a modern stack including **React Native**, **Expo**, **TypeScript**, **Clerk**, **Stripe**, and **Google Maps APIs**. Users can create an account, select a destination, view nearby drivers, and book a ride — all in a seamless flow.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 📱 Features
 
-2. Start the app
+- 🔐 Authentication with **Clerk** (Email/Password and Google OAuth)
+- 🗺️ Address autocomplete using **Google Places API**
+- 🧭 Real-time route rendering with **React Native Maps + Directions**
+- 💳 **Stripe** integration for ride payments (test mode supported)
+- 📦 State management with **Zustand**
+- 📸 Driver & vehicle preview before booking
+- 🎨 Styling with **NativeWind** (Tailwind for React Native)
+- 🧠 Fully **type-safe** codebase with **TypeScript**
+- 🌐 Serverless PostgreSQL database via **Neon**
+- 🚀 **Monorepo** structure with **Expo API Routes**
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 🔄 App Flow
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+1. User opens the app and sees the onboarding screen.
+2. Registers using **Google** or **Email/Password** via **Clerk**.
+3. If using email, a verification code is sent.
+4. Redirected to the home screen.
+5. Selects a destination using Google autocomplete.
+6. Nearby drivers are displayed on the map.
+7. User taps a driver to view:
+   - Driver photo
+   - Car photo
+   - Seat availability
+   - Estimated price and time
+8. Proceeds with payment using **Stripe**.
+9. Booking confirmation modal is shown.
+10. Redirected back to home screen with route and ETA.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## 🧰 Tech Stack
 
-When you're ready, run:
+| Layer         | Technology                                        |
+|---------------|---------------------------------------------------|
+| **Frontend**  | React Native (Expo), NativeWind, TypeScript       |
+| **State Mgmt**| Zustand                                           |
+| **Maps**      | Google Maps API, React Native Maps + Directions   |
+| **Auth**      | Clerk (Email/Password + Google OAuth)             |
+| **Payments**  | Stripe                                            |
+| **Backend**   | Expo API Routes                                   |
+| **Database**  | Neon (PostgreSQL Serverless)                      |
+| **Deployment**| Expo Go                                           |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
 
 ```bash
-npm run reset-project
+git clone https://github.com/MayconProg/ryde.git
+cd ryde
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Install Dependencies
 
-## Learn more
+```bash
+# At the root of the monorepo
+npm install
+# or
+yarn install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 3. Configure Environment Variables
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Create a `.env` file at the root with the following keys:
 
-## Join the community
+```env
+EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_public_key
+DATABASE_URL=your_neon_postgres_url
+EXPO_PUBLIC_SERVER_URL=https://ryde.com/
+EXPO_PUBLIC_GEOAPIFY_API_KEY=your_geoapify_key
+EXPO_PUBLIC_GOOGLE_API_KEY=your_google_api_key
+STRIPE_SECRET_KEY=your_stripe_secret
+EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable
+```
 
-Join our community of developers creating universal apps.
+### 4. Start the Project
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+# From the root
+npm expo start
+# or
+yarn expo start
+```
+
+---
+
+## 💳 Stripe Test Cards
+
+Use the following test card to simulate payments:
+
+```
+Card Number: 4242 4242 4242 4242  
+Expiry: 02/42  
+CVC: 424
+```
+
+More options: [Stripe – Test Cards](https://stripe.com/docs/testing#international-cards)
+
+---
+
+## 🔐 Authentication Flow
+
+- Uses **Clerk** for Google or Email/Password login.
+- A verification code is sent for email signups.
+- After login, users are redirected to the home screen.
+
+---
+
+## 🙌 Contributing
+
+Contributions are welcome! Whether it's a bug report, feature suggestion, or pull request, feel free to participate. You can open an [issue](https://github.com/MayconProg/ryde/issues) or submit a PR.
+
+### To contribute:
+
+```bash
+# Fork the repository
+# Create a new branch
+git checkout -b feature/your-feature
+
+# Make changes, commit, and push
+git commit -m "feat: added new feature"
+git push origin feature/your-feature
+
+# Open a pull request on GitHub
+```
+
+---
+
+Made with 💙 by [MayconProg](https://github.com/MayconProg)
